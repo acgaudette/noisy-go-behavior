@@ -12,6 +12,14 @@ type attribute struct {
 	meta       string
 }
 
+func (this attribute) predict(tick int) {
+	// Rough scaling
+	this.prediction = 0.5 + 0.5*this.noise.Eval2(
+		float64(tick)*DELTA_SCALE,
+		this.value,
+	)
+}
+
 func NewAttribute(meta string) attribute {
 	return attribute{
 		0,

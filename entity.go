@@ -23,13 +23,10 @@ func (this *entity) updateValues(values []float64) {
 	}
 }
 
+// Predict state for next tick
 func (this *entity) predict(tick int) {
 	for i := range this.state {
-		// Rough scaling
-		this.state[i].prediction = 0.5 + 0.5*this.state[i].noise.Eval2(
-			float64(tick)*DELTA_SCALE,
-			this.state[i].value,
-		)
+		this.state[i].predict(tick)
 
 		// Debug
 		fmt.Printf(
