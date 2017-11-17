@@ -1,10 +1,14 @@
 package main
 
-func solve(state []attribute, pool []action) (result action) {
-	min := float64(len(state) + 1)
+import (
+	"fmt"
+)
+
+func solve(e entity, pool []action) (result action) {
+	min := float64(len(e.state) + 1)
 
 	for _, a := range pool {
-		d := a.diff(state)
+		d := a.diff(e.state)
 
 		if d < min {
 			min = d
@@ -12,13 +16,21 @@ func solve(state []attribute, pool []action) (result action) {
 		}
 	}
 
+	// Debug
+	fmt.Printf(
+		"[%s] select %s with diff %g\n",
+		e.meta,
+		result.meta,
+		min,
+	)
+
 	return
 }
 
 func predict(state []attribute, tick int) {
 	for i := range state {
 		// Rough scaling
-		state[i].prediction = 0.5 + 0.5 * state[i].noise.Eval2(
+		state[i].prediction = 0.5 + 0.5*state[i].noise.Eval2(
 			float64(tick),
 			state[i].value,
 		)
