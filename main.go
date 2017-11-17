@@ -29,7 +29,10 @@ func main() {
 	}
 
 	for tick := 0; ; tick++ {
-		update(entities, pool, tick)
+		for i := range entities {
+			entities[i].update(pool, tick)
+		}
+
 		time.Sleep(time.Second)
 		fmt.Println()
 	}
