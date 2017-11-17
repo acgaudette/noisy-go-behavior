@@ -16,17 +16,20 @@ func solve(state []attribute, pool []action) (result action) {
 }
 
 func predict(state []attribute, tick int) {
-	for _, a := range state {
-		a.prediction = a.noise.Eval2(float64(tick), a.value)
+	for i := range state {
+		// Rough scaling
+		state[i].prediction = 0.5 + 0.5 * state[i].noise.Eval2(
+			float64(tick),
+			state[i].value,
+		)
 	}
 }
 
 func update(entities []entity, pool []action, tick int) {
-	for _, e := range entities {
-		result := solve(e.state, pool)
-		e.do(result)
-
-		e.updateValues(result.cost)
-		predict(e.state, tick)
+	for i := range entities {
+		result := solve(entities[i], pool)
+		entities[i].do(result)
+		entities[i].updateValues(result.cost)
+		predict(entities[i].state, tick)
 	}
 }
