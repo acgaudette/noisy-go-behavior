@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
 )
 
 func main() {
+	rand.Seed(time.Now().Unix())
+
 	entities := make([]entity, 1)
 
 	entities[0] = entity{
