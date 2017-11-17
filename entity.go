@@ -53,7 +53,7 @@ func (this *entity) solve(pool []action) (result action) {
 
 	// Debug
 	fmt.Printf(
-		"[%s] select %s with diff %g\n",
+		"[%s] select %s with error %g\n",
 		this.meta,
 		result.meta,
 		min,
