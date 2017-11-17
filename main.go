@@ -1,5 +1,9 @@
 package main
 
+import (
+	"time"
+)
+
 func main() {
 	entities := make([]entity, 1)
 
@@ -25,5 +29,6 @@ func main() {
 
 	for tick := 0; ; tick++ {
 		update(entities, pool, tick)
+		time.Sleep(time.Second)
 	}
 }
