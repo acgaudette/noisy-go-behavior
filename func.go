@@ -31,7 +31,7 @@ func predict(state []attribute, tick int) {
 	for i := range state {
 		// Rough scaling
 		state[i].prediction = 0.5 + 0.5*state[i].noise.Eval2(
-			float64(tick),
+			float64(tick)*DELTA_SCALE,
 			state[i].value,
 		)
 	}
