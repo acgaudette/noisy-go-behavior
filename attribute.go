@@ -12,6 +12,7 @@ type attribute struct {
 	meta       string
 }
 
+// Predict value for next tick
 func (this attribute) predict(tick int) {
 	// Rough scaling
 	this.prediction = 0.5 + 0.5*this.noise.Eval2(

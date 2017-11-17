@@ -38,6 +38,7 @@ func (this *entity) predict(tick int) {
 	}
 }
 
+// Select the best action from a pool with the state prediction
 func (this *entity) solve(pool []action) (result action) {
 	min := float64(len(this.state) + 1)
 
@@ -61,10 +62,12 @@ func (this *entity) solve(pool []action) (result action) {
 	return
 }
 
+// Solve for and perform action; predict next tick
 func (this *entity) update(pool []action, tick int) {
 	result := this.solve(pool)
 	this.do(result)
 	this.updateValues(result.cost)
+
 	this.predict(tick)
 }
 
