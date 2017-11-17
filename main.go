@@ -2,6 +2,7 @@ package main
 
 import (
 	"time"
+	"fmt"
 )
 
 func main() {
@@ -30,5 +31,6 @@ func main() {
 	for tick := 0; ; tick++ {
 		update(entities, pool, tick)
 		time.Sleep(time.Second)
+		fmt.Println()
 	}
 }
