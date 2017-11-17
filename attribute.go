@@ -13,7 +13,7 @@ type attribute struct {
 }
 
 // Predict value for next tick
-func (this attribute) predict(tick int) {
+func (this *attribute) predict(tick int) {
 	// Rough scaling
 	this.prediction = 0.5 + 0.5*this.noise.Eval2(
 		float64(tick)*DELTA_SCALE,
