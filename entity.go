@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 type entity struct {
@@ -36,6 +37,17 @@ func (this *entity) predict(tick int) {
 			this.state[i].prediction,
 		)
 	}
+}
+
+// Get difference between state prediction and actual state
+func (this *entity) diff() []float64 {
+	result := make([]float64, len(this.state))
+
+	for i := range this.state {
+		result[i] = math.Abs(this.state[i].prediction - this.state[i].value)
+	}
+
+	return result
 }
 
 // Select the best action from a pool with the state prediction
