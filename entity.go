@@ -52,10 +52,13 @@ func (this *entity) diff() []float64 {
 
 // Select the best action from a pool with the state prediction
 func (this *entity) solve(pool []action) (result action) {
-	min := float64(len(this.state) + 1)
+	// Calculate diff target to match against
+	target := this.diff()
+	min := float64(len(target) + 1)
 
+	// Look for action with best fit
 	for _, a := range pool {
-		d := a.diff(this.state)
+		d := a.error(target)
 
 		if d < min {
 			min = d
