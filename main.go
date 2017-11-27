@@ -2,23 +2,19 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 	"time"
 )
 
 func main() {
-	rand.Seed(time.Now().Unix())
+	// Initialize engine with attributes
+	behavior := NewEngine(
+		NewAttribute("happiness"),
+		NewAttribute("energy"),
+	)
 
-	// Entity population
-	entities := []entity{
-		entity{
-			[]attribute{
-				NewAttribute("happiness"),
-				NewAttribute("energy"),
-			},
-			"eugene",
-		},
-	}
+	// Add entities
+	behavior.addEntity("eugene")
+	behavior.addEntity("jurgen")
 
 	// Action pool
 	pool := []action{
@@ -34,10 +30,7 @@ func main() {
 
 	// Update loop
 	for tick := 0; ; tick++ {
-		for i := range entities {
-			entities[i].update(pool, tick)
-		}
-
+		behavior.update(pool, tick)
 		time.Sleep(time.Second)
 		fmt.Println()
 	}
