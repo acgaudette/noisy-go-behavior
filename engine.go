@@ -19,15 +19,15 @@ func NewEngine(attributes ...attribute) engine {
 	}
 }
 
-func (this engine) addEntity(label string) {
+func (this *engine) addEntity(label string) {
 	this.entities = append(
 		this.entities,
 		entity{this.attributes, label},
 	)
 }
 
-func (this engine) update(pool []action, tick int) {
+func (this *engine) update(pool []action, tick int) {
 	for i := range this.entities {
-		entities[i].update(pool, tick)
+		this.entities[i].update(pool, tick)
 	}
 }
