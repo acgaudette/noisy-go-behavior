@@ -11,14 +11,17 @@ type engine struct {
 }
 
 func NewEngine(attributes ...attribute) engine {
+	// Seed the RNG
 	rand.Seed(time.Now().Unix())
 
+	// Use shared attribute specification
 	return engine{
 		make([]entity, 0),
 		attributes,
 	}
 }
 
+// Create new entity and add to engine
 func (this *engine) addEntity(label string) {
 	this.entities = append(
 		this.entities,
@@ -26,6 +29,7 @@ func (this *engine) addEntity(label string) {
 	)
 }
 
+// Update all entities in engine
 func (this *engine) update(pool []action, tick int) {
 	for i := range this.entities {
 		this.entities[i].update(pool, tick)
