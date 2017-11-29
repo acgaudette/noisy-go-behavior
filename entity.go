@@ -82,7 +82,6 @@ func (this *entity) update(pool []action, tick int) {
 	result := this.solve(pool)
 	this.do(result)
 	this.updateValues(result.cost)
-
 	this.predict(tick)
 }
 
